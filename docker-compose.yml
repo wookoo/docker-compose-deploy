@@ -1,0 +1,22 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./dockerfile
+    networks:
+    - nat
+    restart: always
+
+  front:
+    build:
+      context: ./front
+      dockerfile: ./dockerfile
+    networks:
+    - nat
+    restart: always
+    ports:
+    - 80:80
+
+networks:
+  nat:
