@@ -9,14 +9,17 @@ services:
     restart: always
 
   front:
-    build:
-      context: ./front
-      dockerfile: ./dockerfile
+    image: nginx:latest
     networks:
     - nat
     restart: always
+    volumes:
+    - ./front/data/certbot/conf:/etc/letsencrypt
+    - ./front/default.conf:/etc/nginx/conf.d/default.conf
+    - ./front/html:/html
     ports:
     - 80:80
+    - 443:443
 
 networks:
   nat:
